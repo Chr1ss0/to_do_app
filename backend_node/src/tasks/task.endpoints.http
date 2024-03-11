@@ -1,0 +1,3 @@
+### Fetch all taks
+GET http://localhost:3200/task
+Content-Type: application/json

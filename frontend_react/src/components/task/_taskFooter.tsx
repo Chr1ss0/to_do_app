@@ -8,11 +8,14 @@ import React, { FC, ReactElement } from 'react';
 
 import PropTypes from 'prop-types';
 import { ITaskFooter } from './interfaces/ITaskFooter';
+import { Status } from '../createTaskForm/enums/Status';
 
 export const TaskFooter: FC<ITaskFooter> = (
   props,
 ): ReactElement => {
   const {
+    id,
+    status,
     onStatusChange = (e) => console.log(e),
     onClick = (e) => console.log(e),
   } = props;
@@ -28,7 +31,8 @@ export const TaskFooter: FC<ITaskFooter> = (
         control={
           <Switch
             color="warning"
-            onChange={(e) => onStatusChange(e)}
+            onChange={(e) => onStatusChange(e, id)}
+            defaultChecked={status === Status.inProgress}
           />
         }
       />
@@ -39,7 +43,7 @@ export const TaskFooter: FC<ITaskFooter> = (
         sx={{
           color: 'white',
         }}
-        onClick={(e) => onClick}
+        onClick={(e) => onClick(e, id)}
       >
         Mark Complete
       </Button>
@@ -50,4 +54,6 @@ export const TaskFooter: FC<ITaskFooter> = (
 TaskFooter.propTypes = {
   onStatusChange: PropTypes.func,
   onClick: PropTypes.func,
+  id: PropTypes.string.isRequired,
+  status: PropTypes.string,
 };

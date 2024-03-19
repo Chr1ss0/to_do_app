@@ -6,6 +6,7 @@ import cors from 'cors';
 import 'dotenv/config';
 import { Task } from './src/tasks/tasks.entity';
 import { taskRouter } from './src/tasks/task.router';
+import morgan from 'morgan';
 
 // Instantiate express app
 const app: Express = express();
@@ -15,6 +16,7 @@ app.use(bodyParser.json());
 
 // Use CORS install types as well
 app.use(cors());
+app.use(morgan('dev'));
 
 // Create Database Connection
 export const AppDataSource = new DataSource({
